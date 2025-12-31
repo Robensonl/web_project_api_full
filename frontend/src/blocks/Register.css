@@ -1,0 +1,110 @@
+
+.Register {
+  max-width: 358px;
+  width: 100%;
+  margin: 60px auto;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.Register__title {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  margin: 0 0 50px;
+  text-align: center;
+}
+
+.Register__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.Register__input {
+  width: 100%;
+  padding: 0 0 13px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  line-height: 17px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.Register__input::placeholder {
+  color: #ccc;
+}
+
+.Register__input:focus {
+  border-bottom-color: #fff;
+}
+
+.Register__button:disabled {
+    background-color: #ccc;
+    color: rgba(0, 0, 0, 0.3);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.Register__button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 216px;
+    background: #fff;
+    border: none;
+    border-radius: 2px;
+    color: #000;
+    font-size: 18px;
+    line-height: 22px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.Register__button:hover {
+  opacity: 0.85;
+}
+
+.Register__text {
+  color: #fff;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 15px 0 0;
+  text-align: center;
+}
+
+.Register__link {
+  color: #ffffff8f;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.Register__link:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 620px) {
+  .Register {
+    margin: 40px auto;
+  }
+  
+  .Register__title {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 40px;
+  }
+  
+  .Register__button {
+    margin-top: 173px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  
+  .Register__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

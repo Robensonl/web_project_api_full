@@ -1,0 +1,91 @@
+.header {
+  display: flex;
+  margin: 45px auto 41px auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid #545454;
+}
+
+.header__logo {
+  margin: 0;
+  width: 173px;
+  height: 33px;
+  
+}
+
+.header__info {
+  display: flex;
+  align-items: center;
+}
+
+.header__link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 22px;
+  transition: opacity 0.3s ease;
+}
+
+.header__link:hover {
+  opacity: 0.6;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__email {
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+}
+
+.header__button {
+  background: none;
+  border: none;
+  color: #a9a9a9;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  padding: 0;
+}
+
+.header__button:hover {
+  opacity: 0.6;
+}
+
+
+@media screen and (max-width: 920px) {
+  .header {
+    padding: 18px 27px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .header {
+    padding: 28px 27px 32px;
+    border-image: 3px solid #ffffff;
+  }
+  
+  .header__logo {
+    width: 126px;
+    height: 37px;
+  }
+  
+  .header__user {
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .header__email,
+  .header__button,
+  .header__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

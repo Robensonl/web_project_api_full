@@ -1,0 +1,112 @@
+
+.cards__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  font-family: "Inter", sans-serif;
+  width: 880px;
+  margin: 0 auto 67px auto;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  background-color: #fff;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 282px;
+}
+
+.card__image {
+  width: 100%;
+  height: 282px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.card__delete-button {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19px;
+  background: transparent url('../images/Trash.svg') center no-repeat;
+  background-size: 16px 16px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.card__delete-button:hover {
+  opacity: 0.6;
+}
+
+.card__description {
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 20px;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.card__like-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card__like-button {
+  border: none;
+  background: url('https://practicum-content.s3.us-west-1.amazonaws.com/web-code/dom/moved_heart.svg') center no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.card__like-button:hover {
+  transform: scale(1.3);
+}
+
+.card__like-button_active {
+  opacity: 1;
+  background: url('https://practicum-content.s3.us-west-1.amazonaws.com/web-code/dom/moved_heart-filled.svg') center no-repeat;
+}
+
+.card__like-count {
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+/* Responsive */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .cards__list {
+    width: 100%;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 25px;
+    justify-items: center;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .cards__list {
+    max-width: 282px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
