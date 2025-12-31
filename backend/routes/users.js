@@ -9,12 +9,11 @@ const {
 } = require('../controllers/users');
 const validationSchemas = require('../middlewares/validation');
 
-// Rutas protegidas
-// ⚠️ IMPORTANTE: Las rutas más específicas deben ir ANTES de las rutas con parámetros
+
 router.get('/', getUsers);
-router.get('/me', getCurrentUser); // Específica - ANTES de /:userId
+router.get('/me', getCurrentUser);
 router.get('/:userId', validationSchemas.userId, getUserById);
-router.patch('/me', validationSchemas.updateProfile, updateProfile); // Específica
+router.patch('/me', validationSchemas.updateProfile, updateProfile);
 router.patch('/me/avatar', validationSchemas.updateAvatar, updateAvatar);
 
 module.exports = router;

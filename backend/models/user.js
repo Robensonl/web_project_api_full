@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'La contraseña es requerida'],
     minlength: [8, 'La contraseña debe tener al menos 8 caracteres'],
-    select: false // No retornar en queries por defecto
+    select: false
   },
   about: {
     type: String,
@@ -42,11 +42,11 @@ const userSchema = new mongoose.Schema({
     }
   }
 }, {
-  timestamps: true, // Añade createdAt y updatedAt automáticamente
+  timestamps: true,
   versionKey: false,
   toJSON: {
     transform: (doc, ret) => {
-      delete ret.password; // Asegurar que nunca se retorne el password
+      delete ret.password;
       return ret;
     }
   },
@@ -58,7 +58,6 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Índice compuesto para búsquedas frecuentes
 userSchema.index({ email: 1, createdAt: -1 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -2,6 +2,15 @@
 node_modules/
 .npm
 
+# Archivos de documentación local
+COMPLIANCE_REPORT.md
+LISTA_DE_CONTROL_P18.md
+DEPLOYMENT_GUIDE.md
+FINAL_SUMMARY.md
+RESUMEN_LISTA_CONTROL.txt
+PRE_DEPLOYMENT_CHECKLIST.md
+STATUS_REPORT.txt
+
 # Environment
 .env
 .env.local

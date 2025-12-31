@@ -7,6 +7,7 @@ const { isCelebrateError } = require('celebrate');
 require('dotenv').config();
 
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { createUser, login } = require('./controllers/users');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
@@ -26,6 +27,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '10kb' }));
 
+// Loggers de request
+app.use(requestLogger);
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -73,6 +76,9 @@ app.use((req, res) => {
     message: `No se encontró la ruta: ${req.method} ${req.url}`
   });
 });
+
+// Logger de errores
+app.use(errorLogger);
 
 app.use((err, req, res, next) => {
   if (isCelebrateError(err)) {

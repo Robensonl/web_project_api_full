@@ -8,7 +8,7 @@ module.exports.createUser = async (req, res, next) => {
   try {
     const { name, email, password, about, avatar } = req.body;
 
-    // Verificar si el usuario ya existe
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       const error = new Error('El email ya está registrado');
@@ -16,10 +16,9 @@ module.exports.createUser = async (req, res, next) => {
       throw error;
     }
 
-    // Hash de la contraseña
+
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Crear usuario
     const user = await User.create({
       name: name || 'Nuevo Usuario',
       email,
@@ -28,7 +27,6 @@ module.exports.createUser = async (req, res, next) => {
       avatar: avatar || 'https://images.pexels.com/photos/19404516/pexels-photo-19404516.jpeg'
     });
 
-    // Eliminar password de la respuesta
     const userResponse = user.toObject();
     delete userResponse.password;
 
