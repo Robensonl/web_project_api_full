@@ -5,7 +5,7 @@
 // ⚠️ IMPORTANTE: Establecer NODE_ENV ANTES de importar app
 process.env.NODE_ENV = 'test';
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'test-secret-key';
-process.env.MONGODB_TEST_URI = process.env.MONGODB_TEST_URI || 'mongodb://localhost:27017/web_project_test';
+process.env.MONGODB_TEST_URI = process.env.MONGODB_TEST_URI || 'mongodb://localhost:27017/around_project_test';
 
 const request = require('supertest');
 const jwt = require('jsonwebtoken');

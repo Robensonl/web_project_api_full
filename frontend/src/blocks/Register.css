@@ -28,12 +28,27 @@
   margin-bottom: 30px;
   border: none;
   border-bottom: 2px solid #ccc;
-  background: transparent;
+  background: transparent !important;
   color: #fff;
   font-size: 14px;
   line-height: 17px;
   outline: none;
   box-sizing: border-box;
+}
+
+.Register__input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.Register__input:-webkit-autofill:hover {
+  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.Register__input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
 .Register__input::placeholder {
@@ -42,6 +57,7 @@
 
 .Register__input:focus {
   border-bottom-color: #fff;
+  background: transparent !important;
 }
 
 .Register__button:disabled {
@@ -50,6 +66,54 @@
     cursor: not-allowed;
     opacity: 0.6;
 }
+
+/* Estilos para mostrar/ocultar contraseña */
+.password__wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password__wrapper .Register__input {
+  padding-right: 25px;
+}
+
+.password__toggle {
+  position: absolute;
+  right: 0;
+  bottom: 11px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  transition: color 0.3s ease;
+  height: 20px;
+  width: 20px;
+}
+
+.password__toggle:hover {
+  color: #fff;
+}
+
+.password__toggle:focus {
+  outline: none;
+  color: #fff;
+}
+
+.password__toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.password__icon {
+  width: 20px;
+  margin-top: -50px;
+  height: 20px;
+}
+
 .Register__button {
     width: 100%;
     padding: 14px;
