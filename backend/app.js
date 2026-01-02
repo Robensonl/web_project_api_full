@@ -114,8 +114,8 @@ if (NODE_ENV !== 'test') {
   mongoose.connect(MONGODB_URI || 'mongodb://localhost:27017/aroundb')
     .then(() => {
       console.log('✅ MongoDB conectado');
-      app.listen(PORT, () => {
-        console.log(`🚀 Servidor en http://localhost:${PORT}`);
+      app.listen(PORT, '0.0.0.0', () => {
+        console.log(`🚀 Servidor en http://0.0.0.0:${PORT}`);
         console.log(`📁 Entorno: ${NODE_ENV || 'development'}`);
       });
     })
