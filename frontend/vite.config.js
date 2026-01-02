@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 30001,
+    port: 5173,
     open: true,
   },
   base: '/web_project_around_auth/', 
