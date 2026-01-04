@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Hmmm 🤷‍♀️! lo siento se requiere autorización' });
+    return res.status(401).json({ message: 'Hmmm! lo siento se requiere autorización por favor' });
   }
 
   // Extraer token
