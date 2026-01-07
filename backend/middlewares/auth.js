@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Hmmm 🤷‍♀️! lo siento se requiere autorización por favor' });
+    return res.status(401).json({ message: 'Se requiere autorizacion' });
   }
 
   // Extraer token
@@ -19,14 +19,13 @@ module.exports = (req, res, next) => {
     payload = jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
     if (err.name === 'JsonWebTokenError') {
-      return res.status(401).json({ message: 'Token inválido' });
+      return res.status(401).json({ message: 'Token invalido' });
     }
     if (err.name === 'TokenExpiredError') {
       return res.status(401).json({ message: 'Token expirado' });
     }
-    return res.status(401).json({ message: 'Error de autorización' });
+    return res.status(401).json({ message: 'Error de autorizacion' });
   }
-
 
   req.user = payload;
   next();
