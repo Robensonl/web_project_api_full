@@ -8,5 +8,5 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
-  base: '/web_project_around_auth/', 
+  base: '/web_project_api_full/', 
 })
