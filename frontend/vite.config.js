@@ -1,12 +1,17 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/web_project_api_full/',
+
   server: {
     port: 5173,
     open: true,
   },
-  base: '/web_project_api_full/', 
+
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
 })
