@@ -109,7 +109,7 @@ class Api {
 
 // Configuración dinámica según el ambiente
 const api = new Api({
-  baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:3000'
+  baseUrl: import.meta.env.VITE_API_URL || 'https://api.educben.mooo.com'
 });
 
 export default api;

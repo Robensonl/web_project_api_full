@@ -1,5 +1,5 @@
 // utils/auth.js
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://api.educben.mooo.com';
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {

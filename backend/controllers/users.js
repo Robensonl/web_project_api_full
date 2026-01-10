@@ -66,7 +66,10 @@ module.exports.login = async (req, res, next) => {
       { expiresIn: '7d' }
     );
 
-    res.json({ token });
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    res.json({ token, ...userResponse });
   } catch (err) {
     next(err);
   }
