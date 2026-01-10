@@ -20,7 +20,7 @@ app.use(helmet());
 
 // Configurar CORS según el ambiente
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'https://www.educben.mooo.com',
   credentials: true,
   optionsSuccessStatus: 200
 };
