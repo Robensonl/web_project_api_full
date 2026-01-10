@@ -2,8 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
-
 module.exports.createUser = async (req, res, next) => {
   try {
     const { name, email, password, about, avatar } = req.body;
@@ -54,7 +52,9 @@ module.exports.login = async (req, res, next) => {
       throw err;
     }
 
-    if (!process.env.JWT_SECRET) {
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      console.error('❌ JWT_SECRET no está definido en .env');
       const err = new Error('Configuración del servidor incompleta');
       err.statusCode = 500;
       throw err;
@@ -62,7 +62,7 @@ module.exports.login = async (req, res, next) => {
 
     const token = jwt.sign(
       { _id: user._id },
-      process.env.JWT_SECRET,
+      jwtSecret,
       { expiresIn: '7d' }
     );
 
