@@ -16,6 +16,7 @@ A full-stack web application for sharing and exploring photos of beautiful place
 - [Project Structure](#-project-structure)
 - [API Endpoints](#-api-endpoints)
 - [Installation](#-installation)
+- [Zero-Trust Architecture](#️-zero-trust-architecture)
 - [Screenshots](#-screenshots)
 - [Author](#-author)
 
@@ -256,6 +257,30 @@ npm test
 # With coverage
 npm run test:coverage
 ```
+
+---
+
+## 🛡️ Zero-Trust Architecture
+
+This project is built with a Zero-Trust security mindset, aligned with **NIST SP 800-207**, **Google BeyondCorp**, and **Microsoft Zero-Trust** standards.
+
+Key security controls already in place:
+
+| Pillar | Control | Status |
+|--------|---------|--------|
+| 🪪 Identity | JWT authentication (every request) | ✅ |
+| 🪪 Identity | bcrypt password hashing | ✅ |
+| 🌐 Network | Strict CORS by origin | ✅ |
+| 🌐 Network | Rate limiting on auth endpoints | ✅ |
+| 🌐 Network | HTTP security headers (Helmet) | ✅ |
+| 📦 Applications | Input validation (Celebrate/Joi) | ✅ |
+| 🗄️ Data | Password masked from API responses | ✅ |
+| 🗄️ Data | HTTPS via Nginx + Certbot | ✅ |
+| 📊 Logs | Structured request/error logs (Winston) | ✅ |
+
+📄 **Full architecture documentation:** [docs/ZERO_TRUST_ARCHITECTURE.md](docs/ZERO_TRUST_ARCHITECTURE.md)
+
+The documentation covers the complete SentinelGate Zero-Trust architecture with all 6 pillars (Identity, Devices, Network, Applications, Data, Logs & Telemetry), implementation details, and a roadmap for future enhancements.
 
 ---
 
