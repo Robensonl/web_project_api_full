@@ -44,6 +44,18 @@ const authLimiter = rateLimit({
   }
 });
 
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  standardHeaders: false,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    res.status(429).json({
+      message: 'Demasiadas solicitudes. Intenta más tarde.'
+    });
+  }
+});
+
 // Rutas de prueba solo en desarrollo
 if (NODE_ENV === 'development') {
   app.get('/crash-test', () => {
@@ -57,6 +69,7 @@ app.post('/signup', authLimiter, createUser);
 app.post('/signin', authLimiter, login);
 
 app.use(auth);
+app.use(apiLimiter);
 app.use(deviceTrust);
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
