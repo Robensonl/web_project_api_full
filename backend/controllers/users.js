@@ -1,28 +1,30 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+const { revokeToken } = require("../services/tokenBlacklist");
+const { logger } = require("../middlewares/logger");
 
 module.exports.createUser = async (req, res, next) => {
   try {
-    const { name, email, password, about, avatar } = req.body;
-
+    const {
+      name, email, password, about, avatar,
+    } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      const error = new Error('El email ya está registrado');
+      const error = new Error("El email ya está registrado");
       error.statusCode = 409;
       throw error;
     }
 
-
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await User.create({
-      name: name || 'Nuevo Usuario',
+      name: name || "Nuevo Usuario",
       email,
       password: hashedPassword,
-      about: about || 'Explorador',
-      avatar: avatar || 'https://images.pexels.com/photos/19404516/pexels-photo-19404516.jpeg'
+      about: about || "Explorador",
+      avatar: avatar || "https://images.pexels.com/photos/19404516/pexels-photo-19404516.jpeg",
     });
 
     const userResponse = user.toObject();
@@ -37,33 +39,33 @@ module.exports.createUser = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      const err = new Error('Credenciales incorrectas');
+      const err = new Error("Credenciales incorrectas");
       err.statusCode = 401;
       throw err;
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      const err = new Error('Credenciales incorrectas');
+      const err = new Error("Credenciales incorrectas");
       err.statusCode = 401;
       throw err;
     }
 
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
-      console.error('❌ JWT_SECRET no está definido en .env');
-      const err = new Error('Configuración del servidor incompleta');
+      console.error("❌ JWT_SECRET no está definido en .env");
+      const err = new Error("Configuración del servidor incompleta");
       err.statusCode = 500;
       throw err;
     }
 
     const token = jwt.sign(
-      { _id: user._id },
+      { _id: user._id, role: user.role },
       jwtSecret,
-      { expiresIn: '7d' }
+      { expiresIn: "7d" },
     );
 
     const userResponse = user.toObject();
@@ -79,7 +81,7 @@ module.exports.getCurrentUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
     if (!user) {
-      const error = new Error('Usuario no encontrado');
+      const error = new Error("Usuario no encontrado");
       error.statusCode = 404;
       throw error;
     }
@@ -102,7 +104,7 @@ module.exports.getUserById = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId);
     if (!user) {
-      const error = new Error('Usuario no encontrado');
+      const error = new Error("Usuario no encontrado");
       error.statusCode = 404;
       throw error;
     }
@@ -122,12 +124,12 @@ module.exports.updateProfile = async (req, res, next) => {
       {
         new: true,
         runValidators: true,
-        context: 'query'
-      }
+        context: "query",
+      },
     );
 
     if (!user) {
-      const error = new Error('Usuario no encontrado');
+      const error = new Error("Usuario no encontrado");
       error.statusCode = 404;
       throw error;
     }
@@ -147,12 +149,12 @@ module.exports.updateAvatar = async (req, res, next) => {
       { avatar },
       {
         new: true,
-        runValidators: true
-      }
+        runValidators: true,
+      },
     );
 
     if (!user) {
-      const error = new Error('Usuario no encontrado');
+      const error = new Error("Usuario no encontrado");
       error.statusCode = 404;
       throw error;
     }
@@ -161,4 +163,28 @@ module.exports.updateAvatar = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+module.exports.logout = (req, res) => {
+  const { token } = req;
+  let expiresAt;
+
+  try {
+    const decoded = jwt.decode(token);
+    if (decoded && decoded.exp) {
+      expiresAt = decoded.exp;
+    }
+  } catch (_) {
+    // ignore decode errors — we still revoke the raw token
+  }
+
+  revokeToken(token, expiresAt);
+
+  logger.info({
+    event: "USER_LOGOUT",
+    userId: req.user._id,
+    ip: req.ip,
+  });
+
+  res.json({ message: "Sesión cerrada correctamente" });
 };

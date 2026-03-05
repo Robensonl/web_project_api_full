@@ -58,7 +58,7 @@ describe('Middlewares', () => {
     // 🧪 PRUEBA #1: Token válido - Acceso permitido
     test('✅ Debería permitir acceso con token válido', async () => {
       const response = await request(app)
-        .get('/users')
+        .get('/users/me')
         .set('Authorization', `Bearer ${testToken}`);
 
       expect(response.status).toBe(200);

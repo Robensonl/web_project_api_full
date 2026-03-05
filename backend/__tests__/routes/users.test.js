@@ -31,10 +31,11 @@ describe('Routes: GET /users', () => {
     await clearDatabase();
     testUser = await User.create({
       ...userFixtures.validUser,
-      email: 'test@example.com'
+      email: 'test@example.com',
+      role: 'admin'
     });
     testToken = jwt.sign(
-      { _id: testUser._id },
+      { _id: testUser._id, role: 'admin' },
       process.env.JWT_SECRET || 'test-secret-key',
       { expiresIn: '7d' }
     );

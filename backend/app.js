@@ -7,6 +7,7 @@ const { isCelebrateError } = require('celebrate');
 require('dotenv').config();
 
 const auth = require('./middlewares/auth');
+const deviceTrust = require('./middlewares/deviceTrust');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { createUser, login } = require('./controllers/users');
 const usersRouter = require('./routes/users');
@@ -56,6 +57,7 @@ app.post('/signup', authLimiter, createUser);
 app.post('/signin', authLimiter, login);
 
 app.use(auth);
+app.use(deviceTrust);
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
 

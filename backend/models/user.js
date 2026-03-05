@@ -40,6 +40,11 @@ const userSchema = new mongoose.Schema({
       validator: (value) => validator.isURL(value, { protocols: ['http', 'https'] }),
       message: 'URL de avatar inválida'
     }
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
   }
 }, {
   timestamps: true,
