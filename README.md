@@ -343,13 +343,11 @@ npm run test:coverage
 
 ### Robenson Louissaint
 
-**Full Stack Developer** | Student | Cybersecurity Enthusiast
-
-I'm a passionate developer advancing through a coding bootcamp, building modern web applications with a focus on clean code and security best practices.
+Aspiring DevSecOps & Application Security Engineer | Full Stack Developer
+I'm a passionate developer advancing through a coding bootcamp, building modern web applications with a focus on clean code, automated testing, infrastructure metrics, and cloud security best practices.
 
 - 💼 [LinkedIn](https://www.linkedin.com/in/robenson-louissaint/)
 - 🐙 [GitHub](https://github.com/Robensonl)
-- 🌐 [Live Project](https://www.educben.mooo.com)
 
 ---
 
